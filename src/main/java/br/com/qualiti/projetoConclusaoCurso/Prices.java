@@ -1,13 +1,25 @@
 package br.com.qualiti.projetoConclusaoCurso;
 
-public class Prices {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "Prices")
+public class Prices {
+	@Column(name ="regularWeekendPf", nullable = false)
 	private Double regularWeekendPf;
+	@Column(name ="loyaltyWeekendPf", nullable = false)
 	private Double loyaltyWeekendPf;
+	@Column(name ="regularWeekendJb", nullable = false)
 	private Double regularWeekendJb;
+	@Column(name ="loyaltyWeekendJb", nullable = false)
 	private Double loyaltyWeekendJb;
+	@Column(name ="regularWeekendMa", nullable = false)
 	private Double regularWeekendMa;
+	@Column(name ="loyaltyWeekendMa", nullable = false)
 	private Double loyaltyWeekendMa;
+	@Column(name ="hotel_Cnpj", nullable = false)
 	private String hotel_Cnpj;
 
 	public Prices() {
