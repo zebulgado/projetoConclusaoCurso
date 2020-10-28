@@ -36,8 +36,8 @@ public class Reservation {
 	@Column(name = "guest_cpf", nullable = false, length = 11)
 	private String guest_cpf;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "hotel", fetch = FetchType.LAZY)
-	private List<Reservation> reservations;
+//	@ManyToOne(cascade = CascadeType.ALL, mappedBy = "hotel", fetch = FetchType.LAZY)
+//	private List<Reservation> reservations;
 
 	public Reservation() {
 		super();
@@ -110,12 +110,12 @@ public class Reservation {
 		this.guest_cpf = guest_cpf;
 	}
 
-	public List<Reservation> getReservations() {
-		return reservations;
-	}
-
-	public void setReservations(List<Reservation> reservations) {
-		this.reservations = reservations;
-	}
+//	public List<Reservation> getReservations() {
+//		return reservations;
+//	}
+//
+//	public void setReservations(List<Reservation> reservations) {
+//		this.reservations = reservations;
+//	}
 
 }
