@@ -33,11 +33,11 @@ public class Hotel {
 	@Column(nullable = false)
 	private int price;
 	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Hotel")
-//	private List<Reservation> reservations;
-//	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Hotel")
-//	private List<Prices> prices;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Hotel")
+	private List<Reservation> reservations;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Hotel")
+	private List<Prices> prices;
 	
 	
 	public Hotel() {
@@ -91,6 +91,30 @@ public class Hotel {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	public List<Prices> getPrices() {
+		return prices;
+	}
+
+	public void setPrices(List<Prices> prices) {
+		this.prices = prices;
 	}
 	
 	
