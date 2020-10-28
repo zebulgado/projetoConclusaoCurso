@@ -1,12 +1,16 @@
 package br.com.qualiti.projetoConclusaoCurso.model;
 
 import java.security.Timestamp;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -31,6 +35,9 @@ public class Reservation {
 
 	@Column(name = "guest_cpf", nullable = false, length = 11)
 	private String guest_cpf;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "hotel", fetch = FetchType.LAZY)
+	private List<Reservation> reservations;
 
 	public Reservation() {
 		super();
@@ -93,6 +100,22 @@ public class Reservation {
 
 	public void setGuest_cnpj(String guest_cnpj) {
 		this.guest_cpf = guest_cnpj;
+	}
+
+	public String getGuest_cpf() {
+		return guest_cpf;
+	}
+
+	public void setGuest_cpf(String guest_cpf) {
+		this.guest_cpf = guest_cpf;
+	}
+
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
 	}
 
 }
