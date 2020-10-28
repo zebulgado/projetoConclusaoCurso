@@ -2,22 +2,41 @@ package br.com.qualiti.projetoConclusaoCurso.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 @Table(name = "hotel")
 public class Hotel {
 	
-	@Column(nullable = false)
+	@Id
+	@Column(unique = true, length = 14)
+	private String cnpj;
+	
+	@Column(nullable = false, length = 100)
 	private String name;
-	@Column(nullable = false)
+	
+	@Column(nullable = false, length = 100)
 	private String email;
-	@Column(nullable = false)
+	
+	@Column(nullable = false, length = 20)
 	private String phone;
+	
 	@Column(nullable = false)
 	private int rating;
+	
 	@Column(nullable = false)
 	private int price;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Hotel")
+	private List<Reservation> reservations;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Hotel")
+	private List<Prices> prices;
+	
 	
 	public Hotel() {
 		super();
