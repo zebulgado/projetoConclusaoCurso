@@ -36,8 +36,8 @@ public class Hotel {
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Hotel")
 //	private List<Reservation> reservations;
 //	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Hotel")
-//	private List<Prices> prices;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel")
+	private List<Prices> prices;
 	
 	
 	public Hotel() {
@@ -108,14 +108,14 @@ public class Hotel {
 //	public void setReservations(List<Reservation> reservations) {
 //		this.reservations = reservations;
 //	}
-//
-//	public List<Prices> getPrices() {
-//		return prices;
-//	}
-//
-//	public void setPrices(List<Prices> prices) {
-//		this.prices = prices;
-//	}
+
+	public List<Prices> getPrices() {
+		return prices;
+	}
+
+	public void setPrices(List<Prices> prices) {
+		this.prices = prices;
+	}
 	
 	
 }

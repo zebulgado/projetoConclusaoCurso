@@ -26,8 +26,8 @@ public class Prices {
 	@Column(name = "loyalty_weekday", nullable = false)
 	private Double loyaltyWeekday;
 
-	// @ManyToOne(fetch = FetchType.EAGER, optional = false)
-	//private Hotel hotel;
+	 @ManyToOne(fetch = FetchType.EAGER, optional = false)
+	private Hotel hotel;
 
 	public Prices() {
 		super();
@@ -50,13 +50,13 @@ public class Prices {
 		this.id = id;
 	}
 
-//	public Hotel getHotel() {
-//		return hotel;
-//	}
-//
-//	public void setHotel(Hotel hotel) {
-//		this.hotel = hotel;
-//	}
+	public Hotel getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
+	}
 
 	public Double getRegularWeekend() {
 		return regularWeekend;
