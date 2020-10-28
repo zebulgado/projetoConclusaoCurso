@@ -2,10 +2,14 @@ package br.com.qualiti.projetoConclusaoCurso.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.project.professor.alocation.model.Departament;
 
 @Entity
 @Table(name = "Prices")
@@ -22,6 +26,9 @@ public class Prices {
 	@Column(name = "loyalty_weekday", nullable = false)
 	private Double loyaltyWeekday;
 
+	//@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	//private Hotel hotel;
+	
 	public Prices() {
 		super();
 	}
