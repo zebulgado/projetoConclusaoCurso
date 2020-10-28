@@ -1,10 +1,13 @@
 package br.com.qualiti.projetoConclusaoCurso.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,6 +36,9 @@ public class Guest {
 	@Column(name = "is_loyalty", nullable = false)
 	private Boolean isLoyalty;
 
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "guest")
+//	private List<Reservation> reservation;
+	
 	public Guest() {
 		super();
 	}
@@ -104,6 +110,14 @@ public class Guest {
 	public void setIsLoyalty(Boolean isLoyalty) {
 		this.isLoyalty = isLoyalty;
 	}
+
+//	public List<Reservation> getReservation() {
+//		return reservation;
+//	}
+//
+//	public void setReservation(List<Reservation> reservation) {
+//		this.reservation = reservation;
+//	}
 	
 	
 	
