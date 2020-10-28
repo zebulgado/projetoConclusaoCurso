@@ -1,4 +1,4 @@
-package br.com.qualiti.projetoConclusaoCurso;
+package br.com.qualiti.projetoConclusaoCurso.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,13 +13,13 @@ public class Prices {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "regularWeekend", nullable = false)
+	@Column(name = "regular_weekend", nullable = false)
 	private Double regularWeekend;
-	@Column(name = "loyaltyWeekend", nullable = false)
+	@Column(name = "loyalty_weekend", nullable = false)
 	private Double loyaltyWeekend;
-	@Column(name = "regularWeekday", nullable = false)
+	@Column(name = "regular_weekday", nullable = false)
 	private Double regularWeekday;
-	@Column(name = "loyaltyWeekday", nullable = false)
+	@Column(name = "loyalty_weekday", nullable = false)
 	private Double loyaltyWeekday;
 
 	public Prices() {
