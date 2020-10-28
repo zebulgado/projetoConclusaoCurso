@@ -33,11 +33,11 @@ public class Hotel {
 	@Column(nullable = false)
 	private int price;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Hotel")
-	private List<Reservation> reservations;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Hotel")
-	private List<Prices> prices;
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Hotel")
+//	private List<Reservation> reservations;
+//	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Hotel")
+//	private List<Prices> prices;
 	
 	
 	public Hotel() {
