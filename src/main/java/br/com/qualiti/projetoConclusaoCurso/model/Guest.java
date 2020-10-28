@@ -1,5 +1,7 @@
 package br.com.qualiti.projetoConclusaoCurso.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,23 +12,23 @@ import javax.persistence.Table;
 public class Guest {
 	
 	@Id
-	@Column(name = "cpf", nullable = false, unique = true)
+	@Column(name = "cpf", nullable = false, unique = true, length = 11)
 	private String cpf;
 	
-	@Column(name = "name", nullable = false)
+	@Column(name = "name", nullable = false, length = 100)
 	private String name;
 	
-	@Column(name = "email", nullable = false)
+	@Column(name = "email", nullable = false, length = 100)
 	private String email;
 	
-	@Column(name = "password", nullable = false)
+	@Column(name = "password", nullable = false, length = 64)
 	private String password;
 	
-	@Column(name = "phone", nullable = false)
+	@Column(name = "phone", nullable = false, length = 20)
 	private String phone;
 	
-	@Column(name = "bith_date", nullable = false)
-	private String birthDate;
+	@Column(name = "bith_date", nullable = false, columnDefinition = "DATE")
+	private Date birthDate;
 	
 	@Column(name = "is_loyalty", nullable = false)
 	private Boolean isLoyalty;
@@ -35,7 +37,7 @@ public class Guest {
 		super();
 	}
 
-	public Guest(String cpf, String name, String email, String password, String phone, String birthDate,
+	public Guest(String cpf, String name, String email, String password, String phone, Date birthDate,
 			Boolean isLoyalty) {
 		super();
 		this.cpf = cpf;
@@ -87,11 +89,11 @@ public class Guest {
 		this.phone = phone;
 	}
 
-	public String getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 
