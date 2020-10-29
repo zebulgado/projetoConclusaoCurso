@@ -7,12 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 
 
 @Entity
-@Table(name = "Prices")
 public class Prices {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,20 +24,11 @@ public class Prices {
 	@Column(name = "loyalty_weekday", nullable = false)
 	private Double loyaltyWeekday;
 
-	 @ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	private Hotel hotel;
 
 	public Prices() {
 		super();
-	}
-
-	public Prices(Long id, Double regularWeekend, Double loyaltyWeekend, Double regularWeekday, Double loyaltyWeekday) {
-		super();
-		this.id = id;
-		this.regularWeekend = regularWeekend;
-		this.loyaltyWeekend = loyaltyWeekend;
-		this.regularWeekday = regularWeekday;
-		this.loyaltyWeekday = loyaltyWeekday;
 	}
 
 	public Long getId() {
@@ -48,14 +37,6 @@ public class Prices {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Hotel getHotel() {
-		return hotel;
-	}
-
-	public void setHotel(Hotel hotel) {
-		this.hotel = hotel;
 	}
 
 	public Double getRegularWeekend() {
@@ -90,4 +71,11 @@ public class Prices {
 		this.loyaltyWeekday = loyaltyWeekday;
 	}
 
+	public Hotel getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
+	}
 }

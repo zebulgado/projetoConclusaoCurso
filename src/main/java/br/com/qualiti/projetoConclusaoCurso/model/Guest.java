@@ -8,10 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "guest")
 public class Guest {
 	
 	@Id
@@ -36,23 +34,11 @@ public class Guest {
 	@Column(name = "is_loyalty", nullable = false)
 	private Boolean isLoyalty;
 
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "guest")
-//	private List<Reservation> reservation;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "guest")
+	private List<Reservation> reservation;
 	
 	public Guest() {
 		super();
-	}
-
-	public Guest(String cpf, String name, String email, String password, String phone, Date birthDate,
-			Boolean isLoyalty) {
-		super();
-		this.cpf = cpf;
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.phone = phone;
-		this.birthDate = birthDate;
-		this.isLoyalty = isLoyalty;
 	}
 
 	public String getCpf() {
@@ -111,15 +97,12 @@ public class Guest {
 		this.isLoyalty = isLoyalty;
 	}
 
-//	public List<Reservation> getReservation() {
-//		return reservation;
-//	}
-//
-//	public void setReservation(List<Reservation> reservation) {
-//		this.reservation = reservation;
-//	}
-	
-	
-	
+	public List<Reservation> getReservation() {
+		return reservation;
+	}
+
+	public void setReservation(List<Reservation> reservation) {
+		this.reservation = reservation;
+	}
 
 }
