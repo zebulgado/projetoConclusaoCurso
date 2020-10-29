@@ -36,8 +36,8 @@ public class Guest {
 	@Column(name = "is_loyalty", nullable = false)
 	private Boolean isLoyalty;
 
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "guest")
-//	private List<Reservation> reservation;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "guest")
+	private List<Reservation> reservation;
 	
 	public Guest() {
 		super();
