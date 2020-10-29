@@ -2,6 +2,7 @@ package br.com.qualiti.projetoConclusaoCurso.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,10 +31,10 @@ public class Hotel {
 	@Column(nullable = false)
 	private int price;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel", cascade = {CascadeType.REMOVE,  CascadeType.REFRESH,  CascadeType.PERSIST})
 	private List<Reservation> reservation;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel", cascade = {CascadeType.REMOVE,  CascadeType.REFRESH,  CascadeType.PERSIST})
 	private List<Prices> prices;
 	
 	
