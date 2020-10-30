@@ -32,11 +32,12 @@ public class Prices {
 		super();
 	}
 	
-	public Prices(Double regularWeekend, Double loyaltyWeekend, Double regularWeekday, Double loyaltyWeekday1) {
+	public Prices(Double regularWeekend, Double loyaltyWeekend, Double regularWeekday, Double loyaltyWeekday1, Hotel hotel) {
 		this.regularWeekend = regularWeekend;
 		this.loyaltyWeekend = regularWeekend;
 		this.regularWeekday = regularWeekday;
 		this.loyaltyWeekday = regularWeekday;
+		this.hotel = hotel;
 	}
 
 	public Long getId() {
