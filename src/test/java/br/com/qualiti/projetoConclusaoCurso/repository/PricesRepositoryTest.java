@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -14,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 
+import br.com.qualiti.projetoConclusaoCurso.model.Hotel;
 import br.com.qualiti.projetoConclusaoCurso.model.Prices;
 
 
@@ -26,15 +25,20 @@ public class PricesRepositoryTest {
 	@Autowired
 	private PricesRepository pricesRepository;
 	
-	Prices pricesTest = new Prices(90.0, 80.0, 110.0, 80.0);
+	@Autowired
+	private HotelRepository hotelRepository;
+	
 
 	@Test
-	public void createTableContent() {
-		Prices prices1 = new Prices(90.0, 80.0, 110.0, 80.0);
-		Prices prices2 = new Prices(90.0, 80.0, 110.0, 80.0);
-		Prices prices3 = new Prices(90.0, 80.0, 110.0, 80.0);
-		Prices prices4 = new Prices(90.0, 80.0, 110.0, 80.0);
-		Prices prices5 = new Prices(90.0, 80.0, 110.0, 80.0);
+	public void saveSomePrices() {
+		Hotel hotelTest = new Hotel("29183746562342", "Master Blaster Hotel", "email@masterblasterhotel.com.br", "81872471946", 4, 5);
+		hotelTest = this.hotelRepository.save(hotelTest);
+		
+		Prices prices1 = new Prices(90.0, 80.0, 110.0, 80.0, hotelTest);
+		Prices prices2 = new Prices(90.0, 80.0, 110.0, 80.0, hotelTest);
+		Prices prices3 = new Prices(90.0, 80.0, 110.0, 80.0, hotelTest);
+		Prices prices4 = new Prices(90.0, 80.0, 110.0, 80.0, hotelTest);
+		Prices prices5 = new Prices(90.0, 80.0, 110.0, 80.0, hotelTest);
 		
 		List<Prices> pricesList = new ArrayList<>();
 		pricesList.add(prices1);
@@ -49,15 +53,12 @@ public class PricesRepositoryTest {
 	@Test
 	public void readAll() {
 		List<Prices> pricesList = pricesRepository.findAll();
-		
-		for (Prices prices : pricesList) {
-			System.out.println(prices.toString());
-		}
 	}
 	
 	@Test
 	public void readById() {
-		pricesRepository.findById(readByIdInternal(pricesTest).getId());
+		Optional<Prices> price = pricesRepository.findById(1L);
+		System.out.println(price.get());
 	}
 	
 	public Prices readByIdInternal(Prices prices) {
@@ -71,25 +72,36 @@ public class PricesRepositoryTest {
 	
 	@Test
 	public void create() {
-		if (readByIdInternal(pricesTest) == null) {
-			pricesRepository.save(pricesTest);
-		} else {
-			System.out.println("Já existe! Operação cancelada.");
-		}
+		Hotel hotelTest = new Hotel("29183746562342", "Master Blaster Hotel", "email@masterblasterhotel.com.br", "81872471946", 4, 5);
+		hotelTest = this.hotelRepository.save(hotelTest);
+		
+		Prices price = new Prices(90.0, 80.0, 110.0, 80.0, hotelTest);
+		
+		pricesRepository.save(price);	
 	}
 	
 	@Test
 	public void update() {
-		this.pricesRepository.save(pricesTest);
+		Hotel hotelTest = new Hotel("29183746562342", "Master Blaster Hotel", "email@masterblasterhotel.com.br", "81872471946", 4, 5);
+		hotelTest = this.hotelRepository.save(hotelTest);
+		
+		Prices price = new Prices(90.0, 80.0, 110.0, 80.0, hotelTest);
+		
+		price = pricesRepository.save(price);
+		price.setLoyaltyWeekday(9000.0);
+		this.pricesRepository.save(price);
 	}
 	
 	@Test
 	public void deleteById() {
-		if (readByIdInternal(pricesTest) != null) {
-			this.pricesRepository.delete(pricesTest);
-		} else {
-			System.out.println("Hotel não existe!! Operação cancelada.");
-		}
+		Hotel hotelTest = new Hotel("29183746562342", "Master Blaster Hotel", "email@masterblasterhotel.com.br", "81872471946", 4, 5);
+		hotelTest = this.hotelRepository.save(hotelTest);
+		
+		Prices price = new Prices(90.0, 80.0, 110.0, 80.0, hotelTest);
+		
+		price = pricesRepository.save(price);
+		
+		this.pricesRepository.delete(price);
 	}
 	
 }
