@@ -43,6 +43,17 @@ public class Hotel {
 	}
 
 
+	public Hotel(String cnpj, String name, String email, String phone, int rating, int price) {
+		super();
+		this.cnpj = cnpj;
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+		this.rating = rating;
+		this.price = price;
+	}
+
+
 	public String getCnpj() {
 		return cnpj;
 	}
@@ -120,6 +131,13 @@ public class Hotel {
 
 	public void setPrices(List<Prices> prices) {
 		this.prices = prices;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Hotel [cnpj=" + cnpj + ", name=" + name + ", email=" + email + ", phone=" + phone + ", rating=" + rating
+				+ ", price=" + price + "]";
 	}
 	
 	
