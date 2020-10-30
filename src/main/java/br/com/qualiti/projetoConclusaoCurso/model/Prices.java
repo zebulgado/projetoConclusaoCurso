@@ -31,6 +31,13 @@ public class Prices {
 	public Prices() {
 		super();
 	}
+	
+	public Prices(Double regularWeekend, Double loyaltyWeekend, Double regularWeekday, Double loyaltyWeekday1) {
+		this.regularWeekend = regularWeekend;
+		this.loyaltyWeekend = regularWeekend;
+		this.regularWeekday = regularWeekday;
+		this.loyaltyWeekday = regularWeekday;
+	}
 
 	public Long getId() {
 		return id;
@@ -78,5 +85,11 @@ public class Prices {
 
 	public void setHotel(Hotel hotel) {
 		this.hotel = hotel;
+	}
+
+	@Override
+	public String toString() {
+		return "Prices [id=" + id + ", regularWeekend=" + regularWeekend + ", loyaltyWeekend=" + loyaltyWeekend
+				+ ", regularWeekday=" + regularWeekday + ", loyaltyWeekday=" + loyaltyWeekday + "]";
 	}
 }

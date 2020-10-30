@@ -42,6 +42,18 @@ public class Guest {
 		super();
 	}
 
+	public Guest(String cpf, String name, String email, String password, String phone, Date birthDate,
+			Boolean isLoyalty) {
+		super();
+		this.cpf = cpf;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.phone = phone;
+		this.birthDate = birthDate;
+		this.isLoyalty = isLoyalty;
+	}
+
 	public String getCpf() {
 		return cpf;
 	}
@@ -104,6 +116,12 @@ public class Guest {
 
 	public void setReservation(List<Reservation> reservation) {
 		this.reservation = reservation;
+	}
+
+	@Override
+	public String toString() {
+		return "Guest [cpf=" + cpf + ", name=" + name + ", email=" + email + ", password=" + password + ", phone="
+				+ phone + ", birthDate=" + birthDate + ", isLoyalty=" + isLoyalty + "]";
 	}
 
 }

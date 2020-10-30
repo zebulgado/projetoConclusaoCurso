@@ -1,0 +1,255 @@
+GuestRepository
+
+package br.com.qualiti.projetoConclusaoCurso.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import br.com.qualiti.projetoConclusaoCurso.model.Guest;
+
+public interface GuestRepository extends JpaRepository<Guest, String> {
+
+}
+
+PricesRepository
+
+package br.com.qualiti.projetoConclusaoCurso.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import br.com.qualiti.projetoConclusaoCurso.model.Prices;
+
+public interface PricesRepository extends JpaRepository<Prices, Long> {
+
+}
+
+GuestRepositoryTest
+
+package br.com.qualiti.projetoConclusaoCurso.repository;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.TestPropertySource;
+
+import br.com.qualiti.projetoConclusaoCurso.model.Guest;
+
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@Rollback(false)
+@TestPropertySource(locations = "classpath:application.properties")
+public class GuestRepositoryTest {
+	
+
+		
+		@Autowired
+		private GuestRepository guestRepository;
+		
+		Date dataTest = new Date();
+		Guest guestTest = new Guest("67066768182", "Othon Negromonte", "email@othonnegromonte.com.br", "123", "81955860703", dataTest, true);
+		
+		@Test
+		public void createTableContent() {
+			Guest guest1 = new Guest("67066768182", "Othon Negromonte", "email@othonnegromonte.com.br", "123", "81955860703", dataTest,  true);
+			Guest guest2 = new Guest("51324999596", "Priscila Rocha", "email@priscilarocha.com.br", "123", "81920507066", dataTest, false);
+			Guest guest3 = new Guest("38568449548", "Elizabeth Pryston", "email@elizabethpryston.com.br", "123", "81895304872", dataTest, true);
+			Guest guest4 = new Guest("59146525206", "Filipe Ferreira", "email@filipeferreira.com.br", "123", "81910989678", dataTest,  true);
+			Guest guest5 = new Guest("88960404231", "Felipe Pontes", "email@mfelipepontes.com.br", "123", "81916680105", dataTest, false);
+			
+			List<Guest> guests = new ArrayList<>();
+			guests.add(guest1);
+			guests.add(guest2);
+			guests.add(guest3);
+			guests.add(guest4);
+			guests.add(guest5);
+			
+			for (Guest guest : guests) {
+				createInternal(guest);
+			}
+			
+		}
+		
+		@Test
+		public void readAll() {
+			List<Guest> guests = guestRepository.findAll();
+			
+			for (Guest guest : guests) {
+				System.out.println(guest.toString());
+			}
+		}
+		
+		@Test
+		public void readById() {
+			guestRepository.findById(readByIdInternal(guestTest).getCpf());
+		}
+		
+		public Guest readByIdInternal(Guest guest) {
+			Optional<Guest> optionalGuest = guestRepository.findById(guest.getCpf());
+			Guest guestReturn = optionalGuest.orElse(null);
+			
+			System.out.println(guestReturn);
+			return guestReturn;
+		}
+		
+		@Test
+		public void create() {
+			if (readByIdInternal(guestTest) == null) {
+				guestRepository.save(guestTest);
+			} else {
+				System.out.println("Cliente já existe! Operação cancelada.");
+			}
+		}
+		
+		public void createInternal(Guest guest) {
+			if (readByIdInternal(guest) == null) {
+				guestRepository.save(guest);
+			} else {
+				System.out.println("Cliente já existe! Operação cancelada.");
+			}
+		} 
+		
+		@Test
+		public void update() {
+			if (readByIdInternal(guestTest) != null) {
+				guestRepository.save(guestTest);
+			} else {
+				System.out.println("Cliente não existe!! Operação cancelada.");
+			}
+		}
+		
+		@Test
+		public void deleteAll() {
+			guestRepository.deleteAll();
+		}
+		
+		@Test
+		public void deleteById() {
+			if (readByIdInternal(guestTest) != null) {
+				guestRepository.delete(guestTest);
+			} else {
+				System.out.println("Cliente não existe!! Operação cancelada.");
+			}
+		}
+
+}
+
+PricesRepositoryTest
+
+package br.com.qualiti.projetoConclusaoCurso.repository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.TestPropertySource;
+
+import br.com.qualiti.projetoConclusaoCurso.model.Prices;
+
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@Rollback(false)
+@TestPropertySource(locations = "classpath:application.properties")
+public class PricesRepositoryTest {
+	
+	@Autowired
+	private PricesRepository pricesRepository;
+	
+	Prices pricesTest = new Prices(120.0, 210.0, 320.0, 420.0);
+	
+	@Test
+	public void createTableContent() {
+		Prices prices1 = new Prices(120.0, 210.0, 320.0, 420.0);
+		Prices prices2 = new Prices(234.0, 312.0, 123.0, 242.0);
+		Prices prices3 = new Prices(142.0, 534.0, 532.0, 726.0);
+		Prices prices4 = new Prices(100.0, 112.0, 321.0, 321.0);
+		Prices prices5 = new Prices(134.0, 213.0, 251.0, 201.0);
+		
+		List<Prices> pricesList = new ArrayList<>();
+		pricesList.add(prices1);
+		pricesList.add(prices2);
+		pricesList.add(prices3);
+		pricesList.add(prices4);
+		pricesList.add(prices5);
+		
+		for (Prices prices : pricesList) {
+			createInternal(prices);
+		}
+		
+	}
+	
+	@Test
+	public void readAll() {
+		List<Prices> pricesList = pricesRepository.findAll();
+		
+		for (Prices prices : pricesList) {
+			System.out.println(prices.toString());
+		}
+	}
+	
+	@Test
+	public void readById() {
+		pricesRepository.findById(readByIdInternal(pricesTest).getId());
+	}
+	
+	public Prices readByIdInternal(Prices prices) {
+		Optional<Prices> optionalPrices = pricesRepository.findById(prices.getId());
+		Prices pricesReturn = optionalPrices.orElse(null);
+		
+		System.out.println(pricesReturn);
+		return pricesReturn;
+	}
+	
+	@Test
+	public void create() {
+		if (readByIdInternal(pricesTest) == null) {
+			pricesRepository.save(pricesTest);
+		} else {
+			System.out.println("Prices já existe! Operação cancelada.");
+		}
+	}
+	
+	public void createInternal(Prices prices) {
+		if (readByIdInternal(prices) == null) {
+			pricesRepository.save(prices);
+		} else {
+			System.out.println("Prices já existe! Operação cancelada.");
+		}
+	} 
+	
+	@Test
+	public void update() {
+		if (readByIdInternal(pricesTest) != null) {
+			pricesRepository.save(pricesTest);
+		} else {
+			System.out.println("Prices não existe!! Operação cancelada.");
+		}
+	}
+	
+	@Test
+	public void deleteAll() {
+		pricesRepository.deleteAll();
+	}
+	
+	@Test
+	public void deleteById() {
+		if (readByIdInternal(pricesTest) != null) {
+			pricesRepository.delete(pricesTest);
+		} else {
+			System.out.println("Prices não existe!! Operação cancelada.");
+		}
+	}
+
+}
