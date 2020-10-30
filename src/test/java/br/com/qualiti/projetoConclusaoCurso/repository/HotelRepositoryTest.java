@@ -57,14 +57,32 @@ public class HotelRepositoryTest {
 //	}
 	
 	@Test
-	public Hotel readById(String id) {
-		//hotel = hotelTest;
-		Optional<Hotel> optionalHotel = hotelRepository.findById(id);
-		Hotel hotelReturn = optionalHotel.orElse(null);
+	public Hotel readById() {
+		String id = "29183746562342";
+		
+		Hotel hotelReturn = readByIdInternal(id);
 		
 		System.out.println(hotelReturn);
 		return hotelReturn;
 	}
+
+
+	private Hotel readByIdInternal(String id) {
+		Optional<Hotel> optionalHotel = hotelRepository.findById(id);
+		return optionalHotel.orElse(null); 
+	}
+	
+	
+	//antigo
+//	@Test
+//	public Hotel readById(String id) {
+//		id = "29183746562342";
+//		Optional<Hotel> optionalHotel = hotelRepository.findById(id);
+//		Hotel hotelReturn = optionalHotel.orElse(null);
+//		
+//		System.out.println(hotelReturn);
+//		return hotelReturn;
+//	}
 	
 //	@Test
 //	public void create(Hotel hotel) {
@@ -90,19 +108,19 @@ public class HotelRepositoryTest {
 //		hotelRepository.deleteAll();
 //	}
 	
-	@Test
-	public void deleteById(Hotel hotel) {
-		hotel = new Hotel();
-		hotel.setCnpj("29183746562342");
-		hotel.setName("Master Blaster Hotel");
-		hotel.setEmail("email@masterblasterhotel.com.br");
-		hotel.setPhone("81872471946");
-		hotel.setPrice(5);
-		hotel.setRating(4);
-		if (readById(hotel.getCnpj()) != null) {
-			hotelRepository.delete(hotel);
-		} else {
-			System.out.println("Hotel não existe!! Operação cancelada.");
-		}
+//	@Test
+//	public void deleteById(Hotel hotel) {
+//		hotel = new Hotel();
+//		hotel.setCnpj("29183746562342");
+//		hotel.setName("Master Blaster Hotel");
+//		hotel.setEmail("email@masterblasterhotel.com.br");
+//		hotel.setPhone("81872471946");
+//		hotel.setPrice(5);
+//		hotel.setRating(4);
+//		if (readById(hotel.getCnpj()) != null) {
+//			hotelRepository.delete(hotel);
+//		} else {
+//			System.out.println("Hotel não existe!! Operação cancelada.");
+//		}
 	}
-}
+//}
