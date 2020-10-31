@@ -31,10 +31,10 @@ public class Hotel {
 	@Column(nullable = false)
 	private int price;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel", cascade = {CascadeType.REMOVE,  CascadeType.REFRESH,  CascadeType.PERSIST})
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel", cascade = CascadeType.ALL)
 	private List<Reservation> reservation;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel", cascade = {CascadeType.REMOVE,  CascadeType.REFRESH,  CascadeType.PERSIST})
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel", cascade = CascadeType.ALL)
 	private List<Prices> prices;
 	
 	

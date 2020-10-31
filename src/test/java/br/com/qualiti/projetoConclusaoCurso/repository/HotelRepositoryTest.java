@@ -103,7 +103,7 @@ public class HotelRepositoryTest {
 	@Test
 	public void deleteById() {
 		if (readByIdInternal(hotelTest) != null) {
-			hotelRepository.delete(hotelTest);
+			hotelRepository.deleteById(hotelTest.getCnpj());;
 		} else {
 			System.out.println("Hotel não existe!! Operação cancelada.");
 		}

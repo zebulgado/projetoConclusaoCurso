@@ -217,7 +217,7 @@ public class PricesRepositoryTest {
 		if (readByIdInternal(pricesTest) == null) {
 			pricesRepository.save(pricesTest);
 		} else {
-			System.out.println("Prices já existe! Operação cancelada.");
+			System.out.println("Campo já existe! Operação cancelada.");
 		}
 	}
 	
@@ -225,7 +225,7 @@ public class PricesRepositoryTest {
 		if (readByIdInternal(prices) == null) {
 			pricesRepository.save(prices);
 		} else {
-			System.out.println("Prices já existe! Operação cancelada.");
+			System.out.println("Campo já existe! Operação cancelada.");
 		}
 	} 
 	
@@ -234,7 +234,7 @@ public class PricesRepositoryTest {
 		if (readByIdInternal(pricesTest) != null) {
 			pricesRepository.save(pricesTest);
 		} else {
-			System.out.println("Prices não existe!! Operação cancelada.");
+			System.out.println("Campo não existe!! Operação cancelada.");
 		}
 	}
 	
@@ -248,7 +248,7 @@ public class PricesRepositoryTest {
 		if (readByIdInternal(pricesTest) != null) {
 			pricesRepository.delete(pricesTest);
 		} else {
-			System.out.println("Prices não existe!! Operação cancelada.");
+			System.out.println("Campo não existe!! Operação cancelada.");
 		}
 	}
 

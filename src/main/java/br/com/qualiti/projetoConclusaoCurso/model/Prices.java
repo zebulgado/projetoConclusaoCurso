@@ -25,7 +25,7 @@ public class Prices {
 	@Column(name = "loyalty_weekday", nullable = false)
 	private Double loyaltyWeekday;
 
-	@ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.REFRESH)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	private Hotel hotel;
 
 	public Prices() {
