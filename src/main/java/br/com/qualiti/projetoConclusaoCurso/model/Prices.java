@@ -1,21 +1,19 @@
 package br.com.qualiti.projetoConclusaoCurso.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 
 
 
 @Entity
 public class Prices {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Column(unique = true, length = 14)
+	private String cnpj;
 	@Column(name = "regular_weekend", nullable = false)
 	private Double regularWeekend;
 	@Column(name = "loyalty_weekend", nullable = false)
@@ -26,26 +24,11 @@ public class Prices {
 	private Double loyaltyWeekday;
 
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@MapsId
 	private Hotel hotel;
 
 	public Prices() {
 		super();
-	}
-	
-	public Prices(Double regularWeekend, Double loyaltyWeekend, Double regularWeekday, Double loyaltyWeekday1, Hotel hotel) {
-		this.regularWeekend = regularWeekend;
-		this.loyaltyWeekend = regularWeekend;
-		this.regularWeekday = regularWeekday;
-		this.loyaltyWeekday = regularWeekday;
-		this.hotel = hotel;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public Double getRegularWeekend() {
@@ -86,11 +69,5 @@ public class Prices {
 
 	public void setHotel(Hotel hotel) {
 		this.hotel = hotel;
-	}
-
-	@Override
-	public String toString() {
-		return "Prices [id=" + id + ", regularWeekend=" + regularWeekend + ", loyaltyWeekend=" + loyaltyWeekend
-				+ ", regularWeekday=" + regularWeekday + ", loyaltyWeekday=" + loyaltyWeekday + "]";
 	}
 }

@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.professor.allocation.model.Departament;
-
-import br.com.qualiti.projetoConclusaoCurso.model.Hotel;
 import br.com.qualiti.projetoConclusaoCurso.model.Prices;
 import br.com.qualiti.projetoConclusaoCurso.service.PricesService;
 import io.swagger.annotations.ApiOperation;
@@ -51,7 +48,7 @@ public class PricesController {
 	@GetMapping(value = "/{cnpj}")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<Prices> getPrices(@PathVariable(value = "cnpj") String cnpj) {
-		Prices prices = pricesService.findByCnpj(cnpj);
+		Prices prices = pricesService.findById(cnpj);
 		if (prices == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
@@ -66,8 +63,8 @@ public class PricesController {
 	})
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<Prices> createPrices(@RequestBody Prices prices, @RequestBody Hotel hotel) {
-		prices = pricesService.save(prices, hotel);
+	public ResponseEntity<Prices> createPrices(@RequestBody Prices prices) {
+		prices = pricesService.save(prices);
 		if (prices == null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} else {
@@ -84,8 +81,8 @@ public class PricesController {
 	@PutMapping(value = "/{cnpj}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<Prices> updatePrices(@PathVariable(value = "cnpj") String cnpj,
-			@RequestBody Prices prices, @RequestBody Hotel hotel) {
-		prices = pricesService.update(prices, hotel);
+			@RequestBody Prices prices) {
+		prices = pricesService.update(prices);
 		if (prices == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
@@ -98,10 +95,10 @@ public class PricesController {
 		@ApiResponse(code = 204, message = "No Content"),
 		@ApiResponse(code = 400, message = "Bad Request")
 	})
-	@DeleteMapping(value = "/{id}")
+	@DeleteMapping(value = "/{cnpj}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public ResponseEntity<Void> deletePrices(@PathVariable(value = "id") Long id) {
-		pricesService.
+	public ResponseEntity<Void> deletePrices(@PathVariable(value = "cnpj") String cnpj) {
+		pricesService.deleteById(cnpj);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	

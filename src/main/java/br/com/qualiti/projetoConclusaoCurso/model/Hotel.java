@@ -43,17 +43,6 @@ public class Hotel {
 	}
 
 
-	public Hotel(String cnpj, String name, String email, String phone, int rating, int price) {
-		super();
-		this.cnpj = cnpj;
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
-		this.rating = rating;
-		this.price = price;
-	}
-
-
 	public String getCnpj() {
 		return cnpj;
 	}
