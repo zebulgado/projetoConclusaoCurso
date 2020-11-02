@@ -17,13 +17,9 @@ public class ReservationService {
 		this.reservationRepository = reservationRepository;
 	}
 
-	public List<Reservation> findAll(String name) {
-		if (name == null) {
-			return reservationRepository.findAll();
-		} else {
-			return ReservationRepository.findByNameContainingIgnoreCase(name);
-		
-		}
+	public List<Reservation> findAll() {
+		return reservationRepository.findAll();
+	}
 
 	public Reservation create(Reservation reservation) {
 		reservation.setRoom(null);

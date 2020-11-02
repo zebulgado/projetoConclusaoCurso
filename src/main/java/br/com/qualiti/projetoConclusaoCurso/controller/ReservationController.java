@@ -29,11 +29,17 @@ public class ReservationController {
 		super();
 		this.reservationService = reservationService;
 	}
+	
+	@ApiOperation(value = "Get all reservation")
+	@ApiResponses({
+	@ApiResponse(code = 200, message = "OK")
+	
+	})
 
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<List<Reservation>> readAll(@RequestParam(name = "name", required = false) String name) {
-		List<Reservation> reservations = reservationService.findAll(name);
+	public ResponseEntity<List<Reservation>> readAll(@RequestParam(name = "id") Long id) {
+		List<Reservation> reservations = reservationService.findAll();
 		return new ResponseEntity<List<Reservation>>(reservations, HttpStatus.OK);
 
 	}
@@ -48,6 +54,14 @@ public class ReservationController {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 	}
+	
+	@ApiOperation(value = "Create reservation")
+	@ApiResponses({
+	@ApiResponse(code = 201, message = "Created"),
+	@ApiResponse(code = 400, message = "Bad Request"),
+	@ApiResponse(code = 404, message = "Not Found")
+		
+	})
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -59,6 +73,14 @@ public class ReservationController {
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		}
 	}
+	
+	@ApiOperation(value = "Update reservation")
+	@ApiResponses({
+	@ApiResponse(code = 200, message = "OK"),
+	@ApiResponse(code = 400, message = "Bad Request"),
+	@ApiResponse(code = 404, message = "Not Found")
+	
+	})
 
 	@PutMapping(path = "/{id}")
 	@ResponseStatus(HttpStatus.OK)
@@ -74,6 +96,14 @@ public class ReservationController {
 
 		}
 	}
+	
+	@ApiOperation(value = "Delete reservation")
+	@ApiResponses({
+	@ApiResponse(code = 204, message = "No Content"),
+	@ApiResponse(code = 400, message = "Bad Request"),
+	@ApiResponse(code = 404, message = "Not Found")
+	
+	})
 
 	@DeleteMapping(path = "/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
