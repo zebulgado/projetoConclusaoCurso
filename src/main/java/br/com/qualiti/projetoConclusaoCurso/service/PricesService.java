@@ -1,16 +1,20 @@
 package br.com.qualiti.projetoConclusaoCurso.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import br.com.qualiti.projetoConclusaoCurso.model.Hotel;
 import br.com.qualiti.projetoConclusaoCurso.model.Prices;
+import br.com.qualiti.projetoConclusaoCurso.repository.HotelRepository;
 import br.com.qualiti.projetoConclusaoCurso.repository.PricesRepository;
 
 @Service
 public class PricesService {
 
 	private PricesRepository pricesRepository;
+	private HotelRepository hotelRepository;
 
 	public PricesService(PricesRepository pricesRepository) {
 		super();
@@ -26,12 +30,15 @@ public class PricesService {
 	}
 
 	public Prices save(Prices prices) {
-		if (pricesRepository.findById(prices.getHotel().getCnpj()) == null) {
+	//	if (pricesRepository.findById(prices.getHotel().getCnpj()) == null) {
+		Hotel hotel = prices.getHotel();
+		hotel = hotelRepository.findById(prices.getCnpj()).orElse(null);
+		prices.setHotel(hotel);
 			pricesRepository.save(prices);
 			return prices;
-		} else {
-			return null;
-		}
+	//	} else {
+	//		return null;
+	//	}
 	}
 
 	public Prices update(Prices prices) {
@@ -44,10 +51,10 @@ public class PricesService {
 	}
 
 	public void deleteById(String cnpj) {
-		if (pricesRepository.findById(cnpj) != null) {
-		} else {
+	//	if (pricesRepository.findById(cnpj) != null) {
+	//	} else {
 			pricesRepository.deleteById(cnpj);
-		}
+	//	}
 	}
 	
 	public void deleteAll() {

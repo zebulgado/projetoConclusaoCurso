@@ -4,8 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 
 
@@ -23,8 +23,8 @@ public class Prices {
 	@Column(name = "loyalty_weekday", nullable = false)
 	private Double loyaltyWeekday;
 
-	@ManyToOne(fetch = FetchType.EAGER, optional = false)
-	@MapsId
+	@PrimaryKeyJoinColumn
+	@OneToOne(fetch = FetchType.EAGER, optional = false)
 	private Hotel hotel;
 
 	public Prices() {
@@ -69,5 +69,20 @@ public class Prices {
 
 	public void setHotel(Hotel hotel) {
 		this.hotel = hotel;
+	}
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+	@Override
+	public String toString() {
+		return "Prices [cnpj=" + cnpj + ", regularWeekend=" + regularWeekend + ", loyaltyWeekend=" + loyaltyWeekend
+				+ ", regularWeekday=" + regularWeekday + ", loyaltyWeekday=" + loyaltyWeekday + ", hotel=" + hotel
+				+ "]";
 	}
 }

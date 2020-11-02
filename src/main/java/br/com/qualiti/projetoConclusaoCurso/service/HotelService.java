@@ -6,13 +6,14 @@ import org.springframework.stereotype.Service;
 
 import br.com.qualiti.projetoConclusaoCurso.model.Hotel;
 import br.com.qualiti.projetoConclusaoCurso.repository.HotelRepository;
+import br.com.qualiti.projetoConclusaoCurso.repository.PricesRepository;
 
 @Service
 public class HotelService {
 
 	private HotelRepository hotelRepository;
 
-	public HotelService(HotelRepository hotelRepository) {
+	public HotelService(HotelRepository hotelRepository, PricesRepository pricesRepository) {
 		super();
 		this.hotelRepository = hotelRepository;
 	}
@@ -30,12 +31,12 @@ public class HotelService {
 	}
 
 	public Hotel save(Hotel hotel) {
-		if (hotelRepository.findById(hotel.getCnpj()) == null) {
+		//if (hotelRepository.findById(hotel.getCnpj()) == null) {
 			hotelRepository.save(hotel);
 			return hotel;
-		} else {
-			return null;
-		}
+		//} else {
+	//		return null;
+	//	}
 	}
 
 	public Hotel update(Hotel hotel) {
@@ -48,10 +49,10 @@ public class HotelService {
 	}
 
 	public void deleteById(String cnpj) {
-		if (hotelRepository.findById(cnpj) != null) {
-		} else {
+	//	if (hotelRepository.findById(cnpj) != null) {
+	//	} else {
 			hotelRepository.deleteById(cnpj);
-		}
+	//	}
 	}
 	
 	public void deleteAll() {
