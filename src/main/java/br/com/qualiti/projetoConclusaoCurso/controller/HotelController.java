@@ -16,63 +16,68 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.qualiti.projetoConclusaoCurso.model.Prices;
-import br.com.qualiti.projetoConclusaoCurso.service.PricesService;
+import br.com.qualiti.projetoConclusaoCurso.model.Hotel;
+import br.com.qualiti.projetoConclusaoCurso.service.HotelService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping(path = "/prices", produces = MediaType.APPLICATION_JSON_VALUE)
-public class PricesController {
+@RequestMapping(path = "/hotel", produces = MediaType.APPLICATION_JSON_VALUE)
+public class HotelController {
 	
-	private PricesService pricesService;
+	private HotelService hotelService;
 
-	public PricesController(PricesService pricesService) {
+	public HotelController(HotelService hotelService) {
 		super();
-		this.pricesService = pricesService;
+		this.hotelService = hotelService;
 	}
 	
-	@ApiOperation(value = "Get all prices")
+	@ApiOperation(value = "Get all Hotels")
 	@ApiResponses({
 		@ApiResponse(code = 200, message = "OK")
 	})
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<List<Prices>> getPricesAll(
-			@RequestParam(name = "name", required = false) String name) {
-		List<Prices> pricesList = pricesService.findAll();
-		return new ResponseEntity<>(pricesList, HttpStatus.OK);
+	public ResponseEntity<List<Hotel>> getHoltels(@RequestParam(name = "name", required = false) String name) {
+		List<Hotel> holtels = hotelService.findAll(name);
+		return new ResponseEntity<>(holtels, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Get hotel")
+	@ApiResponses({
+		@ApiResponse(code = 200, message = "OK"),
+		@ApiResponse(code = 400, message = "Bad Request"),
+		@ApiResponse(code = 404, message = "Not Found")
+	})
 	@GetMapping(value = "/{cnpj}")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<Prices> getPrices(@PathVariable(value = "cnpj") String cnpj) {
-		Prices prices = pricesService.findById(cnpj);
-		if (prices == null) {
+	public ResponseEntity<Hotel> getHotel(@PathVariable(value = "cnpj") String cnpj) {
+		Hotel hotel = hotelService.findById(cnpj);
+		if (hotel == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
-			return new ResponseEntity<>(prices, HttpStatus.OK);
+			return new ResponseEntity<>(hotel, HttpStatus.OK);
 		}
 	}
 	
-	@ApiOperation(value = "Create prices")
+	@ApiOperation(value = "Create hotel")
 	@ApiResponses({
 		@ApiResponse(code = 201, message = "Created"),
 		@ApiResponse(code = 400, message = "Bad Request")
 	})
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<Prices> createPrices(@RequestBody Prices prices) {
-		prices = pricesService.save(prices);
-		if (prices == null) {
+	public ResponseEntity<Hotel> createHotel(@RequestBody Hotel hotel) {
+		hotel = hotelService.save(hotel);
+		if (hotel == null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} else {
-			return new ResponseEntity<>(prices, HttpStatus.CREATED);
+			return new ResponseEntity<>(hotel, HttpStatus.CREATED);
 		}
 	}
 	
-	@ApiOperation(value = "Update prices")
+	@ApiOperation(value = "Update hotel")
 	@ApiResponses({
 		@ApiResponse(code = 200, message = "OK"),
 		@ApiResponse(code = 400, message = "Bad Request"),
@@ -80,37 +85,36 @@ public class PricesController {
 	})
 	@PutMapping(value = "/{cnpj}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<Prices> updatePrices(@PathVariable(value = "cnpj") String cnpj,
-			@RequestBody Prices prices) {
-		prices = pricesService.update(prices);
-		if (prices == null) {
+	public ResponseEntity<Hotel> updateHotel(@PathVariable(value = "cnpj") String cnpj,
+			@RequestBody Hotel hotel) {
+		hotel = hotelService.update(hotel);
+		if (hotel == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
-			return new ResponseEntity<>(prices, HttpStatus.OK);
+			return new ResponseEntity<>(hotel, HttpStatus.OK);
 		}
 	}
-	
-	@ApiOperation(value = "Delete prices")
+
+	@ApiOperation(value = "Delete hotel")
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "No Content"),
 		@ApiResponse(code = 400, message = "Bad Request")
 	})
 	@DeleteMapping(value = "/{cnpj}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public ResponseEntity<Void> deletePrices(@PathVariable(value = "cnpj") String cnpj) {
-		pricesService.deleteById(cnpj);
+	public ResponseEntity<Void> deleteHotel(@PathVariable(value = "cnpj") String cnpj) {
+		hotelService.deleteById(cnpj);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
-	@ApiOperation(value = "Delete all prices")
+
+	@ApiOperation(value = "Delete all hotels")
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "No Content")
 	})
 	@DeleteMapping
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<Void> deleteHotels() {
-		pricesService.deleteAll();
+		hotelService.deleteAll();
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
 }

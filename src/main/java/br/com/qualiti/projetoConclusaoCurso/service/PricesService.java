@@ -9,46 +9,48 @@ import br.com.qualiti.projetoConclusaoCurso.repository.PricesRepository;
 
 @Service
 public class PricesService {
-	
+
 	private PricesRepository pricesRepository;
-	
+
 	public PricesService(PricesRepository pricesRepository) {
 		super();
 		this.pricesRepository = pricesRepository;
 	}
-	
+
 	public List<Prices> findAll() {
-			return pricesRepository.findAll();
+		return pricesRepository.findAll();
 	}
-	
+
 	public Prices findById(String cnpj) {
 		return pricesRepository.findById(cnpj).orElse(null);
 	}
-	
+
 	public Prices save(Prices prices) {
-			if (pricesRepository.findById(prices.getHotel().getCnpj()) == null) {
-				pricesRepository.save(prices);
-				return prices;
-			} else {
-				return null;
-	}
-	}
-	
-	public Prices update(Prices prices) {
-			if (pricesRepository.findById(prices.getHotel().getCnpj()) != null) {
-				pricesRepository.save(prices);
-				return prices;
-			} else {
-				return null;
-			}
-		
+		if (pricesRepository.findById(prices.getHotel().getCnpj()) == null) {
+			pricesRepository.save(prices);
+			return prices;
+		} else {
+			return null;
 		}
-	
+	}
+
+	public Prices update(Prices prices) {
+		if (pricesRepository.findById(prices.getHotel().getCnpj()) != null) {
+			pricesRepository.save(prices);
+			return prices;
+		} else {
+			return null;
+		}
+	}
+
 	public void deleteById(String cnpj) {
 		if (pricesRepository.findById(cnpj) != null) {
 		} else {
-		pricesRepository.deleteById(cnpj);
+			pricesRepository.deleteById(cnpj);
+		}
 	}
-
-}
+	
+	public void deleteAll() {
+		pricesRepository.deleteAllInBatch();
+	}
 }
