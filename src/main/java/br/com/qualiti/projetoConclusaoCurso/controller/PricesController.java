@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.qualiti.projetoConclusaoCurso.model.Hotel;
 import br.com.qualiti.projetoConclusaoCurso.model.Prices;
 import br.com.qualiti.projetoConclusaoCurso.service.PricesService;
 import io.swagger.annotations.ApiOperation;
