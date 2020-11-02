@@ -14,7 +14,7 @@ import br.com.qualiti.projetoConclusaoCurso.repository.PricesRepository;
 public class PricesService {
 
 	private PricesRepository pricesRepository;
-	private HotelRepository hotelRepository;
+	private HotelService hotelService;
 
 	public PricesService(PricesRepository pricesRepository) {
 		super();
@@ -32,7 +32,7 @@ public class PricesService {
 	public Prices save(Prices prices) {
 	//	if (pricesRepository.findById(prices.getHotel().getCnpj()) == null) {
 		Hotel hotel = prices.getHotel();
-		hotel = hotelRepository.findById(prices.getCnpj()).orElse(null);
+		hotel = hotelService.findById(prices.getCnpj());
 		prices.setHotel(hotel);
 			pricesRepository.save(prices);
 			return prices;
