@@ -22,7 +22,7 @@ public class ReservationService {
 	}
 
 	public Reservation create(Reservation reservation) {
-		reservation.setRoom(null);
+		reservation.setId(null);
 		return reservationRepository.save(reservation);
 	}
 
