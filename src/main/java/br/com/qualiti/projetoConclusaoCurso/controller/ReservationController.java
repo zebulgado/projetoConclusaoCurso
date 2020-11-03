@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.qualiti.projetoConclusaoCurso.model.Reservation;
 import br.com.qualiti.projetoConclusaoCurso.service.ReservationService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping(path = "/reservation", produces = MediaType.APPLICATION_JSON_VALUE)
