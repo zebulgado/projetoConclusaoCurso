@@ -30,16 +30,16 @@ public class HotelService {
 	}
 
 	public Hotel save(Hotel hotel) {
-//		if (hotelRepository.findById(hotel.getCnpj()) == null) {
+		if (hotelRepository.findById(hotel.getCnpj()).orElse(null) == null) {
 			hotelRepository.save(hotel);
 			return hotel;
-//		} else {
-//			return null;
-//		}
+		} else {
+			return null;
+		}
 	}
 
 	public Hotel update(Hotel hotel) {
-		if (hotelRepository.findById(hotel.getCnpj()) != null) {
+		if (hotelRepository.findById(hotel.getCnpj()).orElse(null) != null) {
 			hotelRepository.save(hotel);
 			return hotel;
 		} else {
@@ -48,10 +48,10 @@ public class HotelService {
 	}
 
 	public void deleteById(String cnpj) {
-	//	if (hotelRepository.findById(cnpj) != null) {
-	//	} else {
+		if (hotelRepository.findById(cnpj).orElse(null) != null) {
+		} else {
 			hotelRepository.deleteById(cnpj);
-	//	}
+		}
 	}
 	
 	public void deleteAll() {
