@@ -28,18 +28,22 @@ public class Hotel {
 	private String phone;
 	
 	@Column(nullable = false)
-	private int rating;
+	private double rating;
 	
-	@Column(nullable = false)
-	private int price;
+	@Column(name = "regular_weekend", nullable = false)
+	private Double regularWeekend;
+	
+	@Column(name = "loyalty_weekend", nullable = false)
+	private Double loyaltyWeekend;
+	
+	@Column(name = "regular_weekday", nullable = false)
+	private Double regularWeekday;
+	
+	@Column(name = "loyalty_weekday", nullable = false)
+	private Double loyaltyWeekday;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel", cascade = CascadeType.ALL)
 	private List<Reservation> reservation;
-	
-	@JsonBackReference
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel", cascade = CascadeType.ALL)
-	private List<Prices> prices;
-	
 	
 	public Hotel() {
 		super();
@@ -86,23 +90,13 @@ public class Hotel {
 	}
 
 
-	public int getRating() {
+	public double getRating() {
 		return rating;
 	}
 
 
-	public void setRating(int rating) {
+	public void setRating(double rating) {
 		this.rating = rating;
-	}
-
-
-	public int getPrice() {
-		return price;
-	}
-
-
-	public void setPrice(int price) {
-		this.price = price;
 	}
 
 
@@ -121,19 +115,50 @@ public class Hotel {
 	}
 
 
-	public List<Prices> getPrices() {
-		return prices;
+	public Double getRegularWeekend() {
+		return regularWeekend;
 	}
 
 
-	public void setPrices(List<Prices> prices) {
-		this.prices = prices;
+	public void setRegularWeekend(Double regularWeekend) {
+		this.regularWeekend = regularWeekend;
+	}
+
+
+	public Double getLoyaltyWeekend() {
+		return loyaltyWeekend;
+	}
+
+
+	public void setLoyaltyWeekend(Double loyaltyWeekend) {
+		this.loyaltyWeekend = loyaltyWeekend;
+	}
+
+
+	public Double getRegularWeekday() {
+		return regularWeekday;
+	}
+
+
+	public void setRegularWeekday(Double regularWeekday) {
+		this.regularWeekday = regularWeekday;
+	}
+
+
+	public Double getLoyaltyWeekday() {
+		return loyaltyWeekday;
+	}
+
+
+	public void setLoyaltyWeekday(Double loyaltyWeekday) {
+		this.loyaltyWeekday = loyaltyWeekday;
 	}
 
 
 	@Override
 	public String toString() {
 		return "Hotel [cnpj=" + cnpj + ", name=" + name + ", email=" + email + ", phone=" + phone + ", rating=" + rating
-				+ ", price=" + price + ", reservation=" + reservation + ", prices=" + prices + "]";
+				+ ", regularWeekend=" + regularWeekend + ", loyaltyWeekend=" + loyaltyWeekend + ", regularWeekday="
+				+ regularWeekday + ", loyaltyWeekday=" + loyaltyWeekday + ", reservation=" + reservation + "]";
 	}
 }
