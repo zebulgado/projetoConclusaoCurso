@@ -4,8 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 
 
 
@@ -23,8 +23,8 @@ public class Prices {
 	@Column(name = "loyalty_weekday", nullable = false)
 	private Double loyaltyWeekday;
 
-	@PrimaryKeyJoinColumn
-	@OneToOne(fetch = FetchType.EAGER, optional = false)
+	@MapsId
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	private Hotel hotel;
 
 	public Prices() {

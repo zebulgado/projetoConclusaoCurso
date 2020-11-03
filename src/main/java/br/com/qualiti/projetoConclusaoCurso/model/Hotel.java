@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -38,8 +37,8 @@ public class Hotel {
 	private List<Reservation> reservation;
 	
 	@JsonBackReference
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "hotel", cascade = CascadeType.ALL)
-	private Prices prices;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel", cascade = CascadeType.ALL)
+	private List<Prices> prices;
 	
 	
 	public Hotel() {
@@ -116,27 +115,25 @@ public class Hotel {
 		this.reservation = reservation;
 	}
 
-	@Override
-	public String toString() {
-		return "Hotel [cnpj=" + cnpj + ", name=" + name + ", email=" + email + ", phone=" + phone + ", rating=" + rating
-				+ ", price=" + price + "]";
-	}
-
-
-	public Prices getPrices() {
-		return prices;
-	}
-
-
-	public void setPrices(Prices prices) {
-		this.prices = prices;
-	}
-
 
 	public void setReservation(List<Reservation> reservation) {
 		this.reservation = reservation;
 	}
-	
-	
-	
+
+
+	public List<Prices> getPrices() {
+		return prices;
+	}
+
+
+	public void setPrices(List<Prices> prices) {
+		this.prices = prices;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Hotel [cnpj=" + cnpj + ", name=" + name + ", email=" + email + ", phone=" + phone + ", rating=" + rating
+				+ ", price=" + price + ", reservation=" + reservation + ", prices=" + prices + "]";
+	}
 }
