@@ -20,12 +20,8 @@ public class GuestService {
 		this.guestRepository = guestRepository;
 	}
 	
-	public List<Guest> findAll(String name) {
-		if (name == null) {
+	public List<Guest> findAll() {
 			return guestRepository.findAll();
-		} else {
-			return guestRepository.findByNameContainingIgnoreCase(name);
-		}
 	}
 	
 	public Guest findById(String cpf) {

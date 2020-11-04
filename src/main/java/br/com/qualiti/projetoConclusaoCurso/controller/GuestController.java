@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,8 +39,8 @@ import io.swagger.annotations.ApiResponses;
 		})
 		@GetMapping
 		@ResponseStatus(HttpStatus.OK)
-		public ResponseEntity<List<Guest>> getGuestList(@RequestParam(name = "name", required = false) String name) {
-			List<Guest> holtels = guestService.findAll(name);
+		public ResponseEntity<List<Guest>> getGuestList() {
+			List<Guest> holtels = guestService.findAll();
 			return new ResponseEntity<>(holtels, HttpStatus.OK);
 		}
 		
