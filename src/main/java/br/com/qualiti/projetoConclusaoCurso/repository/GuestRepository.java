@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.qualiti.projetoConclusaoCurso.model.Guest;
 
 @Repository
-public interface GuestRepository extends JpaRepository<Guest, String>{
+public interface GuestRepository extends JpaRepository<Guest, Long>{
 
 }
