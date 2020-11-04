@@ -24,7 +24,7 @@ public class Reservation {
 	private Timestamp checkout;
 
 	@Column(name = "room", nullable = false)
-	private int room;
+	private String room;
 	
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	private Guest guest;
@@ -60,11 +60,11 @@ public class Reservation {
 		this.checkout = checkout;
 	}
 
-	public int getRoom() {
+	public String getRoom() {
 		return room;
 	}
 
-	public void setRoom(int room) {
+	public void setRoom(String room) {
 		this.room = room;
 	}
 
