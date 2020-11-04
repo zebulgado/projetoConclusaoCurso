@@ -21,24 +21,22 @@ public class ReservationService {
 		return reservationRepository.findAll();
 	}
 
-	public Reservation create(Reservation reservation) {
-		reservation.setId(null);
-		return reservationRepository.save(reservation);
-	}
-
 	public Reservation findById(Long id) {
 		return reservationRepository.findById(id).orElse(null);
 	}
 
 	public Reservation save(Reservation reservation) {
-		reservation.setId(null);
-		return save(reservation);
-
+		if (reservationRepository.findById(reservation.getId()).orElse(null) == null) {
+			reservationRepository.save(reservation);
+			return reservation;
+		} else {
+			return null;
+		}
 	}
 
 	public Reservation update(Reservation reservation) {
-		Long id = reservation.getId();
-		if (id == null) {
+		if (reservationRepository.findById(reservation.getId()).orElse(null) != null) {
+			reservationRepository.save(reservation);
 			return reservation;
 		} else {
 			return null;
@@ -46,13 +44,12 @@ public class ReservationService {
 	}
 
 	public void deleteById(Long id) {
-		if (reservationRepository.findById(id) != null) {
+		if (reservationRepository.findById(id).orElse(null) != null) {
 		} else {
 			reservationRepository.deleteById(id);
-			return;
 		}
 	}
-
+	
 	public void deleteAll() {
 		reservationRepository.deleteAllInBatch();
 	}

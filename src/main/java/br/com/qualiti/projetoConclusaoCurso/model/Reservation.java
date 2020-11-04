@@ -23,8 +23,8 @@ public class Reservation {
 	@Column(columnDefinition = "DateTime", nullable = false)
 	private Timestamp checkout;
 
-	@Column(name = "room", nullable = false, length = 20)
-	private String room;
+	@Column(name = "room", nullable = false)
+	private int room;
 	
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	private Guest guest;
@@ -60,11 +60,11 @@ public class Reservation {
 		this.checkout = checkout;
 	}
 
-	public String getRoom() {
+	public int getRoom() {
 		return room;
 	}
 
-	public void setRoom(String room) {
+	public void setRoom(int room) {
 		this.room = room;
 	}
 
