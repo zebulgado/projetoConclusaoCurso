@@ -45,7 +45,6 @@ public class ReservationService {
 
 	public void deleteById(Long id) {
 		if (reservationRepository.findById(id).orElse(null) != null) {
-		} else {
 			reservationRepository.deleteById(id);
 		}
 	}

@@ -49,7 +49,6 @@ public class HotelService {
 
 	public void deleteById(String cnpj) {
 		if (hotelRepository.findById(cnpj).orElse(null) != null) {
-		} else {
 			hotelRepository.deleteById(cnpj);
 		}
 	}

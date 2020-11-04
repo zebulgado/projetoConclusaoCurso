@@ -49,8 +49,8 @@ public class GuestService {
 	}
 	
 	public void deleteById(String cpf) {
-		if (findById(cpf) != null) {
-			guestRepository.findById(cpf);
+		if (guestRepository.findById(cpf).orElse(null) != null) {
+			guestRepository.deleteById(cpf);
 		}
 	}
 	
