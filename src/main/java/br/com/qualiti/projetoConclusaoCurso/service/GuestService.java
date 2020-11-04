@@ -66,8 +66,8 @@ public class GuestService {
 	       for (byte b : messageDigest) { 
 	         hexString.append(String.format("%02X", 0xFF & b));
 	       }
-	       String senhahex = hexString.toString();
+	       String password = hexString.toString();
 
-	       return senhahex;
+	       return password;
 	}
 }
