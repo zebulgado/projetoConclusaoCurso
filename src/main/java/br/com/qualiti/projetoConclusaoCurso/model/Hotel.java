@@ -40,6 +40,9 @@ public class Hotel {
 	@Column(name = "loyalty_weekday", nullable = false)
 	private Double loyaltyWeekday;
 	
+	@Column(name = "url_photo")
+	private String urlPhoto;
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel", cascade = CascadeType.ALL)
 	private List<Reservation> reservation;
 	
@@ -153,10 +156,20 @@ public class Hotel {
 	}
 
 
+	public String getUrlPhoto() {
+		return urlPhoto;
+	}
+
+
+	public void setUrlPhoto(String urlPhoto) {
+		this.urlPhoto = urlPhoto;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Hotel [cnpj=" + cnpj + ", name=" + name + ", email=" + email + ", phone=" + phone + ", rating=" + rating
 				+ ", regularWeekend=" + regularWeekend + ", loyaltyWeekend=" + loyaltyWeekend + ", regularWeekday="
-				+ regularWeekday + ", loyaltyWeekday=" + loyaltyWeekday + ", reservation=" + reservation + "]";
+				+ regularWeekday + ", loyaltyWeekday=" + loyaltyWeekday + ", urlPhoto=" + urlPhoto + "]";
 	}
 }
