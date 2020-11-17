@@ -17,10 +17,10 @@ public class Reservation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(columnDefinition = "DateTime", nullable = false)
+	@Column(nullable = false)
 	private Timestamp checkin;
 
-	@Column(columnDefinition = "DateTime", nullable = false)
+	@Column(nullable = false)
 	private Timestamp checkout;
 
 	@Column(name = "room", nullable = false)
