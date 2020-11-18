@@ -83,10 +83,9 @@ import io.swagger.annotations.ApiResponses;
 			@ApiResponse(code = 400, message = "Bad Request"),
 			@ApiResponse(code = 404, message = "Not Found")
 		})
-		@PutMapping(value = "/{cpf}", consumes = MediaType.APPLICATION_JSON_VALUE)
+		@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 		@ResponseStatus(HttpStatus.OK)
-		public ResponseEntity<Guest> updateGuest(@PathVariable(value = "cpf") String cpf,
-				@RequestBody Guest guest) throws NoSuchAlgorithmException {
+		public ResponseEntity<Guest> updateGuest(@RequestBody Guest guest) throws NoSuchAlgorithmException {
 			guest = guestService.update(guest);
 			if (guest == null) {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
