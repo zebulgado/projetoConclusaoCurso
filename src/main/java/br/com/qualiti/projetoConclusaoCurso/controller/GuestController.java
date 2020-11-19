@@ -61,6 +61,23 @@ import io.swagger.annotations.ApiResponses;
 			}
 		}
 		
+		@ApiOperation(value = "Check Password")
+		@ApiResponses({
+			@ApiResponse(code = 200, message = "OK"),
+			@ApiResponse(code = 400, message = "Bad Request"),
+			@ApiResponse(code = 404, message = "Not Found")
+		})
+		@GetMapping(value = "/{cpf}")
+		@ResponseStatus(HttpStatus.OK)
+		public ResponseEntity<Boolean> getGuest(@PathVariable(value = "cpf") String cpf, String password) throws NoSuchAlgorithmException {
+			Boolean validate = guestService.checkLogin(cpf, password);
+			if (cpf == null) {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			} else {
+				return new ResponseEntity<>(validate, HttpStatus.OK);
+			}
+		}
+		
 		@ApiOperation(value = "Create guest")
 		@ApiResponses({
 			@ApiResponse(code = 201, message = "Created"),
