@@ -28,16 +28,25 @@ public class GuestService {
 		return guestRepository.findById(cpf).orElse(null);
 	}
 	
-	public Boolean checkLogin(String cpf, String password) throws NoSuchAlgorithmException {
+	
+	public Boolean checkLogin(String cpf, String password) throws NoSuchAlgorithmException { 
 		Guest guest = guestRepository.findById(cpf).orElse(null);
-		if (guest != null) {
+		if (guest != null) { 
 			String cryptoPassword = crypto(password);
-			if (guest.getPassword().equals(cryptoPassword)) {
-				return true;
-			}
-		}
-		return false;
+			if (guest.getPassword().equals(cryptoPassword)) { 
+				return true; 
+			} 
+		} return false;
 	}
+	 
+	
+	/*
+	 * public Boolean checkLogin(Guest guest) throws NoSuchAlgorithmException {
+	 * Guest guestDB = guestRepository.findById(guest.getCpf()).orElse(null); if
+	 * (guestDB != null) { if
+	 * (crypto(guest.getPassword()).equals(guestDB.getPassword())) { return true; }
+	 * } return false; }
+	 */
 	
 	public Guest save(Guest guest) throws NoSuchAlgorithmException {
 		if (guestRepository.findById(guest.getCpf()).orElse(null) == null) {
