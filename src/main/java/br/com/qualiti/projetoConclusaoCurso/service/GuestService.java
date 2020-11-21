@@ -38,15 +38,6 @@ public class GuestService {
 			} 
 		} return false;
 	}
-	 
-	
-	/*
-	 * public Boolean checkLogin(Guest guest) throws NoSuchAlgorithmException {
-	 * Guest guestDB = guestRepository.findById(guest.getCpf()).orElse(null); if
-	 * (guestDB != null) { if
-	 * (crypto(guest.getPassword()).equals(guestDB.getPassword())) { return true; }
-	 * } return false; }
-	 */
 	
 	public Guest save(Guest guest) throws NoSuchAlgorithmException {
 		if (guestRepository.findById(guest.getCpf()).orElse(null) == null) {

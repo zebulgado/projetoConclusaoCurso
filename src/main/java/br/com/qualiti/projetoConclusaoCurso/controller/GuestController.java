@@ -73,25 +73,6 @@ public class GuestController {
 					ResponseEntity<>(validate, HttpStatus.OK); 
 		}
 	}
-	 
-
-	/*
-	 * @ApiOperation(value = "Validate guest")
-	 * 
-	 * @ApiResponses({
-	 * 
-	 * @ApiResponse(code = 200, message = "OK"),
-	 * 
-	 * @ApiResponse(code = 400, message = "Bad Request") })
-	 * 
-	 * @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-	 * 
-	 * @ResponseStatus(HttpStatus.OK) public ResponseEntity<Boolean>
-	 * validateGuest(@RequestBody Guest guest) throws NoSuchAlgorithmException {
-	 * Boolean validated = guestService.checkLogin(guest); if (guest == null) {
-	 * return new ResponseEntity<>(HttpStatus.BAD_REQUEST); } else { return new
-	 * ResponseEntity<>(validated, HttpStatus.OK); } }
-	 */
 
 	@ApiOperation(value = "Create guest")
 	@ApiResponses({ @ApiResponse(code = 201, message = "Created"), @ApiResponse(code = 400, message = "Bad Request") })
