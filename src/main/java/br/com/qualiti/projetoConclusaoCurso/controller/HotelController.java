@@ -42,8 +42,8 @@ public class HotelController {
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<List<Hotel>> getHoltels(@RequestParam(name = "name", required = false) String name) {
-		List<Hotel> holtels = hotelService.findAll(name);
-		return new ResponseEntity<>(holtels, HttpStatus.OK);
+		List<Hotel> hotels = hotelService.findAll(name);
+		return new ResponseEntity<>(hotels, HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "Get hotel")
@@ -69,16 +69,12 @@ public class HotelController {
 		@ApiResponse(code = 400, message = "Bad Request"),
 		@ApiResponse(code = 404, message = "Not Found")
 	})
-	@GetMapping(value = "/", params = {"guest", "startDate", "endDate"})
+	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<List<Hotel>> getCheaper(@RequestParam Guest guest, 
 			Timestamp startDate, Timestamp endDate) {
 		List<Hotel> listHotel = hotelService.findCheaper(guest, startDate, endDate);
-		if (listHotel == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		} else {
-			return new ResponseEntity<>(listHotel, HttpStatus.OK);
-		}
+		return new ResponseEntity<>(listHotel, HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "Create hotel")
