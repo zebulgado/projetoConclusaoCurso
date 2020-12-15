@@ -1,5 +1,6 @@
 package br.com.qualiti.projetoConclusaoCurso.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.qualiti.projetoConclusaoCurso.model.Guest;
 import br.com.qualiti.projetoConclusaoCurso.model.Hotel;
 import br.com.qualiti.projetoConclusaoCurso.service.HotelService;
 import io.swagger.annotations.ApiOperation;
@@ -58,6 +60,24 @@ public class HotelController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
 			return new ResponseEntity<>(hotel, HttpStatus.OK);
+		}
+	}
+	
+	@ApiOperation(value = "Get Cheaper Hotel")
+	@ApiResponses({
+		@ApiResponse(code = 200, message = "OK"),
+		@ApiResponse(code = 400, message = "Bad Request"),
+		@ApiResponse(code = 404, message = "Not Found")
+	})
+	@GetMapping(value = "/{cnpj}", params = {"guest", "startDate", "endDate"})
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<List<Hotel>> getCheaper(@PathVariable(value = "cnpj") String cnpj, @RequestParam Guest guest, 
+			Timestamp startDate, Timestamp endDate) {
+		List<Hotel> listHotel = hotelService.findCheaper(cnpj, guest, startDate, endDate);
+		if (listHotel == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<>(listHotel, HttpStatus.OK);
 		}
 	}
 	

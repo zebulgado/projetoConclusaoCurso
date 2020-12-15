@@ -1,9 +1,14 @@
 package br.com.qualiti.projetoConclusaoCurso.service;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TreeMap;
 
 import org.springframework.stereotype.Service;
 
+import br.com.qualiti.projetoConclusaoCurso.model.Guest;
 import br.com.qualiti.projetoConclusaoCurso.model.Hotel;
 import br.com.qualiti.projetoConclusaoCurso.repository.HotelRepository;
 
@@ -27,6 +32,39 @@ public class HotelService {
 
 	public Hotel findById(String cnpj) {
 		return hotelRepository.findById(cnpj).orElse(null);
+	}
+	
+	public List<Hotel> findCheaper(String cnpj, Guest guest, Timestamp startDate, Timestamp endDate) {
+		TreeMap<Double, Hotel> rank = new TreeMap<>();
+		Hotel hotelDatesUtil = new Hotel();
+		List<Timestamp> timestampList = hotelDatesUtil.toTimestampList(startDate, endDate);
+		
+		if (validateDates(startDate, endDate)) {
+			for (Hotel hotel : hotelRepository.findAll()) {
+				Double totalPrice = hotel.getTotalPrice(timestampList, guest);
+				if(rank.isEmpty() ||
+						!rank.containsKey(totalPrice) ||
+						(rank.containsKey(totalPrice) && rank.get(totalPrice).getRating() < hotel.getRating()))
+				{
+					rank.put(totalPrice, hotel);
+				}
+			}
+		}
+		List<Hotel> listHotel = new ArrayList<Hotel>(rank.values());
+		return listHotel;
+	}
+	
+	public Boolean validateDates(Timestamp startDate, Timestamp endDate) {
+		if (startDate.after(endDate)) {
+			return false;
+		} else {
+			Calendar cal = Calendar.getInstance();
+			Timestamp timestampToday = new Timestamp(cal.getTimeInMillis());
+			if (startDate.before(timestampToday)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public Hotel save(Hotel hotel) {

@@ -63,7 +63,7 @@ public class GuestController {
 		@ApiResponse(code = 404, message = "Not Found") })
 	@GetMapping(value = "/{cpf}", params = "password" )
 	@ResponseStatus(HttpStatus.OK) public ResponseEntity<Boolean>
-	validateLogin(@PathVariable(value = "cpf") String cpf,@RequestParam String password)throws NoSuchAlgorithmException { 
+	validateLogin(@PathVariable(value = "cpf") String cpf, @RequestParam String password)throws NoSuchAlgorithmException { 
 		Boolean validate = guestService.checkLogin(cpf, password); 
 		if (cpf == null) { 
 			return new

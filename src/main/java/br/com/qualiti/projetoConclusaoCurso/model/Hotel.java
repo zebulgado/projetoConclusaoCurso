@@ -1,5 +1,8 @@
 package br.com.qualiti.projetoConclusaoCurso.model;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -164,7 +167,61 @@ public class Hotel {
 	public void setUrlPhoto(String urlPhoto) {
 		this.urlPhoto = urlPhoto;
 	}
+	
+	public double getTotalPrice(List<Timestamp> dates, Guest guest) {
+		double totalPrice = 0d;
+		for (Calendar cal : timestampToCalendar(dates)) {
+			totalPrice += getCheaper(cal, guest);
+		}
+		return totalPrice;
+	}
+	
+	private boolean isWeekend(Calendar calendar)
+	{
+		return calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || 
+				calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY;
+	}
+	
+	public double getCheaper(Calendar calendar, Guest guest)
+	{
+		if(isWeekend(calendar))
+		{
+			if(guest.getIsLoyalty() == guest.getIsLoyalty())
+			{
+				return getLoyaltyWeekend();
+			}else
+			{
+				return getRegularWeekend();
+			}
+		}else {
+			if(guest.getIsLoyalty() == guest.getIsLoyalty())
+			{
+				return getLoyaltyWeekday();
+			}else
+			{
+				return getRegularWeekday();
+			}
+		}
+	}
 
+	public List<Calendar> timestampToCalendar(List<Timestamp> timestamp) {
+		List<Calendar> calendarResult = new ArrayList<>();
+		
+		for (Timestamp timestampresult : timestamp) {
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(timestampresult);
+			calendarResult.add(cal);
+		}
+		return calendarResult;
+	}
+	
+	public List<Timestamp> toTimestampList (Timestamp startDate, Timestamp endDate) {
+		List<Timestamp> timestampList = new ArrayList<>();
+		for (Timestamp timestamp : timestampList) {
+			timestampList.add(timestamp);
+		}
+		return timestampList;
+	}
 
 	@Override
 	public String toString() {

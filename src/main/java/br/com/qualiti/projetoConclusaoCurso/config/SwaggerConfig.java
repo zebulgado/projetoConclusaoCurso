@@ -40,8 +40,8 @@ public class SwaggerConfig {
 
 	private ApiInfo getApiInfo() {
 		return new ApiInfoBuilder()
-				.title("Professor Allocation")
-				.description("Professor Allocation Rest Server")
+				.title("Projeto Hotel")
+				.description("Projeto Hotel Rest Server")
 				.version("0.0.1-SNAPSHOT")
 				.build();
 	}
