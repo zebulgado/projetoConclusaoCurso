@@ -69,7 +69,7 @@ public class HotelController {
 		@ApiResponse(code = 400, message = "Bad Request"),
 		@ApiResponse(code = 404, message = "Not Found")
 	})
-	@GetMapping(params = {"guest", "startDate", "endDate"})
+	@GetMapping(value = "/", params = {"guest", "startDate", "endDate"})
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<List<Hotel>> getCheaper(@RequestParam Guest guest, 
 			Timestamp startDate, Timestamp endDate) {
