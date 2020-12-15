@@ -34,7 +34,7 @@ public class HotelService {
 		return hotelRepository.findById(cnpj).orElse(null);
 	}
 	
-	public List<Hotel> findCheaper(String cnpj, Guest guest, Timestamp startDate, Timestamp endDate) {
+	public List<Hotel> findCheaper(Guest guest, Timestamp startDate, Timestamp endDate) {
 		TreeMap<Double, Hotel> rank = new TreeMap<>();
 		Hotel hotelDatesUtil = new Hotel();
 		List<Timestamp> timestampList = hotelDatesUtil.toTimestampList(startDate, endDate);

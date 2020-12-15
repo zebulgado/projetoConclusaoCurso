@@ -69,11 +69,11 @@ public class HotelController {
 		@ApiResponse(code = 400, message = "Bad Request"),
 		@ApiResponse(code = 404, message = "Not Found")
 	})
-	@GetMapping(value = "/{cnpj}", params = {"guest", "startDate", "endDate"})
+	@GetMapping(params = {"guest", "startDate", "endDate"})
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<List<Hotel>> getCheaper(@PathVariable(value = "cnpj") String cnpj, @RequestParam Guest guest, 
+	public ResponseEntity<List<Hotel>> getCheaper(@RequestParam Guest guest, 
 			Timestamp startDate, Timestamp endDate) {
-		List<Hotel> listHotel = hotelService.findCheaper(cnpj, guest, startDate, endDate);
+		List<Hotel> listHotel = hotelService.findCheaper(guest, startDate, endDate);
 		if (listHotel == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {

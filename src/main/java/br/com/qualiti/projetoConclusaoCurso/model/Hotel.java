@@ -186,7 +186,7 @@ public class Hotel {
 	{
 		if(isWeekend(calendar))
 		{
-			if(guest.getIsLoyalty() == guest.getIsLoyalty())
+			if(guest.getIsLoyalty())
 			{
 				return getLoyaltyWeekend();
 			}else
@@ -194,7 +194,7 @@ public class Hotel {
 				return getRegularWeekend();
 			}
 		}else {
-			if(guest.getIsLoyalty() == guest.getIsLoyalty())
+			if(!guest.getIsLoyalty())
 			{
 				return getLoyaltyWeekday();
 			}else
