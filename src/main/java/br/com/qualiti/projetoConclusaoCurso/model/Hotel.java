@@ -48,6 +48,7 @@ public class Hotel {
 	@Column(name = "url_photo")
 	private String urlPhoto;
 	
+	@JsonIgnoreProperties({ "hotel" })
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel", cascade = CascadeType.ALL)
 	private List<Reservation> reservation;
 	
