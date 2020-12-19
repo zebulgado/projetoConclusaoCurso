@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.qualiti.projetoConclusaoCurso.model.Guest;
 import br.com.qualiti.projetoConclusaoCurso.model.Hotel;
 import br.com.qualiti.projetoConclusaoCurso.service.HotelService;
 import io.swagger.annotations.ApiOperation;
@@ -63,17 +62,29 @@ public class HotelController {
 		}
 	}
 	
-	@ApiOperation(value = "Get Cheaper Hotel")
+//	@ApiOperation(value = "Get Cheaper Hotel")
+//	@ApiResponses({
+//		@ApiResponse(code = 200, message = "OK"),
+//		@ApiResponse(code = 400, message = "Bad Request"),
+//		@ApiResponse(code = 404, message = "Not Found")
+//	})
+//	@GetMapping(params = {"cpf", "startDate", "endDate"})
+//	@ResponseStatus(HttpStatus.OK)
+//	public ResponseEntity<List<Hotel>> findCheaper(@RequestParam String cpf, 
+//			@RequestParam Timestamp startDate, @RequestParam Timestamp endDate) {
+//		List<Hotel> listHotel = hotelService.findCheaper(cpf, startDate, endDate);
+//		return new ResponseEntity<>(listHotel, HttpStatus.OK);
+//	}
+	
+	@ApiOperation(value = "Get cheaper Hotels")
 	@ApiResponses({
-		@ApiResponse(code = 200, message = "OK"),
-		@ApiResponse(code = 400, message = "Bad Request"),
-		@ApiResponse(code = 404, message = "Not Found")
+		@ApiResponse(code = 200, message = "OK")
 	})
-	@GetMapping(params = {"guest", "startDate", "endDate"})
+	@GetMapping(path = "/cheaper")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<List<Hotel>> getCheaper(@RequestParam Guest guest, 
+	public ResponseEntity<List<Hotel>> findCheaper(@RequestParam String cpf, 
 			@RequestParam Timestamp startDate, @RequestParam Timestamp endDate) {
-		List<Hotel> listHotel = hotelService.findCheaper(guest, startDate, endDate);
+		List<Hotel> listHotel = hotelService.findCheaper(cpf, startDate, endDate);
 		return new ResponseEntity<>(listHotel, HttpStatus.OK);
 	}
 	

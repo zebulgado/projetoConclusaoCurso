@@ -3,6 +3,7 @@ package br.com.qualiti.projetoConclusaoCurso.service;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -10,16 +11,19 @@ import org.springframework.stereotype.Service;
 
 import br.com.qualiti.projetoConclusaoCurso.model.Guest;
 import br.com.qualiti.projetoConclusaoCurso.model.Hotel;
+import br.com.qualiti.projetoConclusaoCurso.repository.GuestRepository;
 import br.com.qualiti.projetoConclusaoCurso.repository.HotelRepository;
 
 @Service
 public class HotelService {
 
 	private HotelRepository hotelRepository;
+	private GuestRepository guestRepository;
 
-	public HotelService(HotelRepository hotelRepository) {
+	public HotelService(HotelRepository hotelRepository, GuestRepository guestRepository) {
 		super();
 		this.hotelRepository = hotelRepository;
+		this.guestRepository = guestRepository;
 	}
 
 	public List<Hotel> findAll(String name) {
@@ -34,14 +38,16 @@ public class HotelService {
 		return hotelRepository.findById(cnpj).orElse(null);
 	}
 	
-	public List<Hotel> findCheaper(Guest guest, Timestamp startDate, Timestamp endDate) {
+	public List<Hotel> findCheaper(String cpf, Timestamp startDate, Timestamp endDate) {
 		TreeMap<Double, Hotel> rank = new TreeMap<>();
 		Hotel hotelDatesUtil = new Hotel();
-		List<Timestamp> timestampList = hotelDatesUtil.toTimestampList(startDate, endDate);
+		List<Calendar> dates = hotelDatesUtil.timestampToCalendar(startDate, endDate);
+		Guest guest = new Guest();
+		guest = guestRepository.findById(cpf).orElse(null);
 		
-		if (validateDates(startDate, endDate)) {
+//		if (validateDates(startDate, endDate)) {
 			for (Hotel hotel : hotelRepository.findAll()) {
-				Double totalPrice = hotel.getTotalPrice(timestampList, guest);
+				Double totalPrice = hotel.getTotalPrice(dates, guest);
 				if(rank.isEmpty() ||
 						!rank.containsKey(totalPrice) ||
 						(rank.containsKey(totalPrice) && rank.get(totalPrice).getRating() < hotel.getRating()))
@@ -49,8 +55,8 @@ public class HotelService {
 					rank.put(totalPrice, hotel);
 				}
 			}
-		}
-		List<Hotel> listHotel = new ArrayList<Hotel>(rank.values());
+//		}
+		List<Hotel> listHotel = new LinkedList<Hotel>(rank.values());
 		return listHotel;
 	}
 	

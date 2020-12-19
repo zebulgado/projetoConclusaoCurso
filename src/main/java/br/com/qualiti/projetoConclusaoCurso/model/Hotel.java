@@ -1,8 +1,8 @@
 package br.com.qualiti.projetoConclusaoCurso.model;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -168,9 +168,9 @@ public class Hotel {
 		this.urlPhoto = urlPhoto;
 	}
 	
-	public double getTotalPrice(List<Timestamp> dates, Guest guest) {
+	public double getTotalPrice(List<Calendar> dates, Guest guest) {
 		double totalPrice = 0d;
-		for (Calendar cal : timestampToCalendar(dates)) {
+		for (Calendar cal : dates) {
 			totalPrice += getCheaper(cal, guest);
 		}
 		return totalPrice;
@@ -203,24 +203,25 @@ public class Hotel {
 			}
 		}
 	}
-
-	public List<Calendar> timestampToCalendar(List<Timestamp> timestamp) {
-		List<Calendar> calendarResult = new ArrayList<>();
-		
-		for (Timestamp timestampresult : timestamp) {
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(timestampresult);
-			calendarResult.add(cal);
-		}
-		return calendarResult;
-	}
 	
-	public List<Timestamp> toTimestampList (Timestamp startDate, Timestamp endDate) {
-		List<Timestamp> timestampList = new ArrayList<>();
-		for (Timestamp timestamp : timestampList) {
-			timestampList.add(timestamp);
+	public List<Calendar> timestampToCalendar (Timestamp startDate, Timestamp endDate) {
+		List<Calendar> calendarResult = new LinkedList<>(); //LinkedList garante a lista ordenada arraylist não
+		
+		Calendar firstCalendar = Calendar.getInstance();
+		firstCalendar.setTime(startDate);
+		
+		
+		Calendar lastCalendar = Calendar.getInstance();
+		lastCalendar.setTime(endDate);
+		
+		while (firstCalendar.before(lastCalendar)) {
+			calendarResult.add(firstCalendar);
+			firstCalendar.add(Calendar.DATE, 1);
 		}
-		return timestampList;
+		
+		calendarResult.add(lastCalendar);
+		
+		return calendarResult;
 	}
 
 	@Override

@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Guest {
 	
+
 	@Id
 	@Column(name = "cpf", nullable = false, unique = true, length = 11)
 	private String cpf;
@@ -41,7 +42,7 @@ public class Guest {
 	public Guest() {
 		super();
 	}
-
+	
 	public String getCpf() {
 		return cpf;
 	}
