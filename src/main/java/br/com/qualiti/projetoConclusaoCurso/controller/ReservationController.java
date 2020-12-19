@@ -41,7 +41,7 @@ public class ReservationController {
 
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<List<Reservation>> readAll(@RequestParam(name = "id") Long id) {
+	public ResponseEntity<List<Reservation>> readAll() {
 		List<Reservation> reservations = reservationService.findAll();
 		return new ResponseEntity<List<Reservation>>(reservations, HttpStatus.OK);
 
