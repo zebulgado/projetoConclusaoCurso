@@ -1,6 +1,8 @@
 package br.com.qualiti.projetoConclusaoCurso.model;
 
-import java.sql.Timestamp;
+
+
+import java.security.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
