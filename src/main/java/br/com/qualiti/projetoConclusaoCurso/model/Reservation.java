@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Reservation {
 
@@ -28,9 +30,11 @@ public class Reservation {
 	@Column(name = "room", nullable = false)
 	private String room;
 	
+	@JsonIgnoreProperties({ "guest" })
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	private Guest guest;
-
+	
+	@JsonIgnoreProperties({ "hotel" })
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	private Hotel hotel;
 
