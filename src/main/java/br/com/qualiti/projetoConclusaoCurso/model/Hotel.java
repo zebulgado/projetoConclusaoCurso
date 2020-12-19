@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Hotel {
 	
@@ -46,6 +48,7 @@ public class Hotel {
 	@Column(name = "url_photo")
 	private String urlPhoto;
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel", cascade = CascadeType.ALL)
 	private List<Reservation> reservation;
 	
