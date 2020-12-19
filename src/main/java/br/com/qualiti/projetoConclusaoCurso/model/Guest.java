@@ -10,8 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class Guest {
 	
@@ -38,7 +36,6 @@ public class Guest {
 	@Column(name = "is_loyalty", nullable = false)
 	private Boolean isLoyalty;
 	
-	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "guest", cascade = {CascadeType.REMOVE,  CascadeType.REFRESH})
 	private List<Reservation> reservation;
 	

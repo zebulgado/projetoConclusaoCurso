@@ -1,8 +1,6 @@
 package br.com.qualiti.projetoConclusaoCurso.model;
 
-
-
-import java.sql.Timestamp;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,37 +9,36 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Reservation {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "reservation_seq_gen")
+	@SequenceGenerator(name = "reservation_seq_gen", sequenceName = "reservation_id_seq")
 	private Long id;
 
 	@Column(nullable = false)
-	private Timestamp checkin;
+	private Date checkin;
 
 	@Column(nullable = false)
-	private Timestamp checkout;
-
-	@Column(name = "room", nullable = false)
-	private String room;
+	private Date checkout;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({ "reservation" })
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	private Guest guest;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({ "reservation" })
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	private Hotel hotel;
 
 	public Reservation() {
 		super();
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -50,28 +47,20 @@ public class Reservation {
 		this.id = id;
 	}
 
-	public Timestamp getCheckin() {
+	public Date getCheckin() {
 		return checkin;
 	}
 
-	public void setCheckin(Timestamp checkin) {
+	public void setCheckin(Date checkin) {
 		this.checkin = checkin;
 	}
 
-	public Timestamp getCheckout() {
+	public Date getCheckout() {
 		return checkout;
 	}
 
-	public void setCheckout(Timestamp checkout) {
+	public void setCheckout(Date checkout) {
 		this.checkout = checkout;
-	}
-
-	public String getRoom() {
-		return room;
-	}
-
-	public void setRoom(String room) {
-		this.room = room;
 	}
 
 	public Hotel getHotel() {

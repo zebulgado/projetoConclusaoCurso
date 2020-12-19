@@ -1,7 +1,6 @@
 package br.com.qualiti.projetoConclusaoCurso.service;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
