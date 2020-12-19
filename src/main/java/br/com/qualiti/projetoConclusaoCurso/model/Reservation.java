@@ -2,7 +2,7 @@ package br.com.qualiti.projetoConclusaoCurso.model;
 
 
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Reservation {
@@ -30,11 +30,11 @@ public class Reservation {
 	@Column(name = "room", nullable = false)
 	private String room;
 	
-	@JsonIgnoreProperties({ "guest" })
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	private Guest guest;
 	
-	@JsonIgnoreProperties({ "hotel" })
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	private Hotel hotel;
 
